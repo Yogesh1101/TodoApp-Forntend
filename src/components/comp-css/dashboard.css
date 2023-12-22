@@ -1,0 +1,21 @@
+.main-div {
+  height: 100vh;
+}
+.main-navbar {
+  background-color: #990011 !important;
+}
+.nav-toggler {
+  background-color: #fcf6f5;
+  border: #fcf6f5;
+}
+.nav-title {
+  color: #fcf6f5 !important;
+}
+.nav-names {
+  color: #fcf6f5 !important;
+  margin-left: 50px;
+}
+.nav-names:hover {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}

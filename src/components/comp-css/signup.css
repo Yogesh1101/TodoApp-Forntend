@@ -1,0 +1,52 @@
+.signup-div {
+  height: 100%;
+  background-color: white;
+}
+.signup-right,
+.signup-left {
+  display: block;
+}
+.signup-left {
+  flex: 1;
+  padding: 150px;
+}
+.signup-right {
+  background-color: orange;
+  flex: 1;
+}
+.signup-title {
+  color: orange;
+  font-size: 50px;
+}
+.signup-description {
+  text-align: justify;
+  font-size: 16.5px;
+}
+.signup-toLogin:hover {
+  cursor: pointer;
+  color: red;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+@media only screen and (max-width: 925px) {
+  .signup-right {
+    flex: 0;
+  }
+  .signup-left,
+  .signup-left p {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (max-width: 1340px) {
+  .signup-left {
+    padding: 25px;
+  }
+}
+
+@media only screen and (max-width: 495px) {
+  .signup-left .signup-description {
+    display: none;
+  }
+}

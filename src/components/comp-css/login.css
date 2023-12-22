@@ -1,0 +1,52 @@
+.login-div {
+  height: 100%;
+  background-color: white;
+}
+.login-right,
+.login-left {
+  display: block;
+}
+.login-left {
+  flex: 1;
+  padding: 150px;
+}
+.login-right {
+  background-color: orange;
+  flex: 1;
+}
+.login-title {
+  color: orange;
+  font-size: 50px;
+}
+.login-description {
+  text-align: justify;
+  font-size: 16.5px;
+}
+.login-toSignup:hover {
+  cursor: pointer;
+  color: red;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+@media only screen and (max-width: 925px) {
+  .login-right {
+    flex: 0;
+  }
+  .login-left,
+  .login-left p {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (max-width: 1340px) {
+  .login-left {
+    padding: 25px;
+  }
+}
+
+@media only screen and (max-width: 495px) {
+  .login-left .login-description {
+    display: none;
+  }
+}
