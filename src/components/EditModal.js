@@ -19,18 +19,11 @@ export function EditModal({
   getUserTodo,
 }) {
   const [editTodoLoadingButton, setEditTodoLoadingButton] = useState(false);
-  const dateTime = new Date();
-  const postDate = `${dateTime.getDate()}-${
-    dateTime.getMonth() + 1
-  }-${dateTime.getFullYear()}`;
-  const postTime = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
 
   const formik = useFormik({
     initialValues: {
       title: todo.title,
       description: todo.description,
-      date: postDate,
-      time: postTime,
     },
     validationSchema: editTodoFormValidationSchema,
     onSubmit: (values) => {
@@ -40,9 +33,14 @@ export function EditModal({
   });
 
   const editTodo = async (values) => {
+    const dateTime = new Date();
+    const postDate = `${dateTime.getDate()}-${
+      dateTime.getMonth() + 1
+    }-${dateTime.getFullYear()}`;
+    const postTime = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
     await fetch(`${API}/todo/edit/${todo._id}`, {
       method: "PUT",
-      body: JSON.stringify(values),
+      body: JSON.stringify({ ...values, date: postDate, time: postTime }),
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),

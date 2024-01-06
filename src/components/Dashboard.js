@@ -82,18 +82,10 @@ function Dashboard() {
     checkToken();
   }, []);
 
-  const dateTime = new Date();
-  const postDate = `${dateTime.getDate()}-${
-    dateTime.getMonth() + 1
-  }-${dateTime.getFullYear()}`;
-  const postTime = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
-
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
-      date: postDate,
-      time: postTime,
     },
     validationSchema: createTodoFormValidationSchema,
     onSubmit: (values, actions) => {
@@ -104,9 +96,14 @@ function Dashboard() {
   });
 
   const createTodo = async (values) => {
+    const dateTime = new Date();
+    const postDate = `${dateTime.getDate()}-${
+      dateTime.getMonth() + 1
+    }-${dateTime.getFullYear()}`;
+    const postTime = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
     await fetch(`${API}/todo/new`, {
       method: "POST",
-      body: JSON.stringify(values),
+      body: JSON.stringify({ ...values, date: postDate, time: postTime }),
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -136,7 +133,7 @@ function Dashboard() {
           <Navbar expand="lg" className="shadow-lg main-navbar">
             <Container>
               <Navbar.Brand className="fs-3 nav-title">
-                {userData.firstName} {userData.lastName}
+                YK's TODO APP
               </Navbar.Brand>
               <Navbar.Toggle
                 className="nav-toggler"
@@ -163,7 +160,7 @@ function Dashboard() {
 
           <div className="container mt-5">
             <div className="d-flex justify-content-around align-items-center py-5">
-              <h1>YOUR TODO's</h1>
+              <h1>{userData.firstName} {userData.lastName}</h1>
               <Fab
                 color="primary"
                 aria-label="add"
@@ -172,15 +169,20 @@ function Dashboard() {
                 <AddIcon />
               </Fab>
             </div>
-            <div className="row h-100 mt-5 gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3">
-              {userTodos.map((todo, index) => (
-                <TodoList
-                  todo={todo}
-                  index={index}
-                  key={index}
-                  getUserTodo={getUserTodo}
-                />
-              ))}
+            <div>
+              {userTodos.length === 0 ? (
+                <h1 className="w-100 text-center mt-5 text-warning">No Todos to Display.</h1>
+              ) : (
+                <div className="row h-100 mt-5 gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                  {userTodos.map((todo, index) => (
+                    <TodoList
+                      todo={todo}
+                      key={index}
+                      getUserTodo={getUserTodo}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
